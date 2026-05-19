@@ -7,7 +7,7 @@
 <body>
 
 <div class="navbar">
-    <h1>PokéVault</h1>
+    <h1>PokéTracker</h1>
 </div>
 
 <div class="container">
