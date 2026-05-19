@@ -12,8 +12,8 @@
 3. Start Apache and MySQL
 4. Open phpMyAdmin
 5. Create database:
-   pokevault_db
+   poketracker_db
 6. Import:
-   database/pokevault_db.sql
+   database/poketracker_db.sql
 7. Visit:
-   http://localhost/pokevault
+   http://localhost/poketracker
