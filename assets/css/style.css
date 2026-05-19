@@ -31,3 +31,32 @@ button {
     padding: 10px 20px;
     cursor: pointer;
 }
+
+body {
+    background-color: #1e1e2f;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    width: 350px;
+    margin: 30px auto;
+    background: #2b2b40;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+button {
+    background: #ffcb05;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
