@@ -40,6 +40,7 @@ if (isset($_POST['login'])) {
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 

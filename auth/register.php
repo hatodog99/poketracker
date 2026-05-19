@@ -24,6 +24,7 @@ if (isset($_POST['register'])) {
 <html>
 <head>
     <title>Register</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
