@@ -65,6 +65,10 @@ $result = mysqli_query($conn, $sql);
 
         <p>Rating: <?php echo $row['rating']; ?>/10</p>
 
+        <a href="edit-pokemon.php?id=<?php echo $row['id']; ?>">
+            Edit
+        </a>
+
     </div>
 
     <?php
