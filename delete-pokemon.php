@@ -11,7 +11,8 @@ include 'includes/connection.php';
 $id = $_GET['id'];
 
 $sql = "DELETE FROM pokemon
-        WHERE id='$id'";
+        WHERE id='$id'
+        AND user_id='{$_SESSION['user_id']}'";
 
 if (mysqli_query($conn, $sql)) {
 
