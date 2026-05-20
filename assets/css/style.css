@@ -101,3 +101,15 @@ button {
 .grass {
     background: green;
 }
+
+a {
+    text-decoration: none;
+    color: white;
+    background: #444;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+a:hover {
+    opacity: 0.8;
+}
