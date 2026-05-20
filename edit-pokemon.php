@@ -11,7 +11,9 @@ include 'includes/connection.php';
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM pokemon WHERE id='$id'";
+$sql = "SELECT * FROM pokemon
+        WHERE id='$id'
+        AND user_id='{$_SESSION['user_id']}'";
 
 $result = mysqli_query($conn, $sql);
 
