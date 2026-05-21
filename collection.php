@@ -47,11 +47,15 @@ $result = mysqli_query($conn, $sql);
 </head>
 <body>
 
-    <a href="dashboard.php">Dashboard</a>
+    <div class="nav">
 
-    <a href="add-pokemon.php">Add Pokémon</a>
+        <a href="dashboard.php">Dashboard</a>
 
-    <a href="auth/logout.php">Logout</a>
+        <a href="add-pokemon.php">Add Pokémon</a>
+
+        <a href="auth/logout.php">Logout</a>
+
+    </div>
 
     <hr>
 
