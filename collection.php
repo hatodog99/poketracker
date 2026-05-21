@@ -105,7 +105,8 @@ $result = mysqli_query($conn, $sql);
 
     <?php
     if (mysqli_num_rows($result) == 0) {
-        echo "<p>No Pokémon added yet!</p>";
+        echo "<h2>No Pokémon found.</h2>";
+        echo "<p>Add your first Pokémon!</p>";
     }
     ?>
 

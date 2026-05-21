@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 
 include 'includes/connection.php';
 
-
 $id = $_GET['id'];
 
 $sql = "SELECT * FROM pokemon
@@ -24,8 +23,6 @@ if (!$pokemon) {
 }
 
 ?>
-
-
 
 <?php
 
@@ -47,14 +44,11 @@ if (isset($_POST['update_pokemon'])) {
                    WHERE id='$id'";
 
     if (mysqli_query($conn, $update_sql)) {
-
         header("Location: collection.php");
+        echo "<p>Pokémon updated successfully!</p>";
         exit();
-
     } else {
-
         echo "Error: " . mysqli_error($conn);
-
     }
 }
 ?>

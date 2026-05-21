@@ -29,14 +29,6 @@ if (isset($_POST['add_pokemon'])) {
        die("Rating must be between 1 and 10.");
     }
 
-    $image_type = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
-
-    $allowed_types = ['jpg', 'jpeg', 'png'];
-
-    if (!in_array($image_type, $allowed_types)) {
-        die("Only JPG, JPEG, and PNG files are allowed.");
-    }
-
     if ($_FILES['image']['size'] > 2000000) {
         die("Image size too large. 2MB max.");
     }
@@ -48,6 +40,14 @@ if (isset($_POST['add_pokemon'])) {
     $folder = "uploads/" . $image_name;
 
     move_uploaded_file($temp_name, $folder);
+
+    $image_type = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+
+    $allowed_types = ['jpg', 'jpeg', 'png'];
+
+    if (!in_array($image_type, $allowed_types)) {
+        die("Only JPG, JPEG, and PNG files are allowed.");
+    }
 
     // Insert into database
     $sql = "INSERT INTO pokemon
