@@ -83,4 +83,5 @@
 
 TBA // I'll finish later. Screenshots will be separate.
 
+<img width="168" height="299" alt="image" src="https://github.com/user-attachments/assets/5e561eeb-4141-45d4-b0f3-8e4ee3fdf63f" />
 
