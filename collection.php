@@ -13,8 +13,15 @@ include 'includes/connection.php';
 
 $user_id = $_SESSION['user_id'];
 
+$search = "";
+
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+}
+
 $sql = "SELECT * FROM pokemon
-        WHERE user_id = '$user_id'
+        WHERE user_id='$user_id'
+        AND name LIKE '%$search%'
         ORDER BY created_at DESC";
 
 $result = mysqli_query($conn, $sql);
@@ -38,6 +45,21 @@ $result = mysqli_query($conn, $sql);
     <hr>
 
     <h1>My Pokémon Collection</h1>
+
+    <form method="GET">
+
+        <input type="text"
+            name="search"
+            placeholder="Search Pokémon"
+            value="<?php echo $search; ?>">
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+    <br>
 
     <div class="pokemon-container">
 
