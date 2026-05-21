@@ -19,10 +19,21 @@ if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
 
+$type_filter = "";
+
+if (isset($_GET['type'])) {
+    $type_filter = $_GET['type'];
+}
+
 $sql = "SELECT * FROM pokemon
         WHERE user_id='$user_id'
-        AND name LIKE '%$search%'
-        ORDER BY created_at DESC";
+        AND name LIKE '%$search%'";
+
+if ($type_filter != "") {
+    $sql .= " AND type='$type_filter'";
+}
+
+$sql .= " ORDER BY created_at DESC";
 
 $result = mysqli_query($conn, $sql);
 
@@ -60,6 +71,26 @@ $result = mysqli_query($conn, $sql);
     </form>
 
     <br>
+
+    <form method="GET">
+
+        <select name="type">
+
+            <option value="">All Types</option>
+
+            <option value="Fire">Fire</option>
+            <option value="Water">Water</option>
+            <option value="Grass">Grass</option>
+            <option value="Electric">Electric</option>
+            <option value="Psychic">Psychic</option>
+
+        </select>
+
+        <button type="submit">
+            Filter
+        </button>
+
+    </form>
 
     <div class="pokemon-container">
 
