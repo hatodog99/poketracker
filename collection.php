@@ -96,6 +96,11 @@ $result = mysqli_query($conn, $sql);
 
     </form>
 
+    <p>
+    Total Results:
+    <?php echo mysqli_num_rows($result); ?>
+    </p>
+
     <div class="pokemon-container">
 
     <?php
