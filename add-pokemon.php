@@ -15,38 +15,54 @@ if (isset($_POST['add_pokemon'])) {
 
     $user_id = $_SESSION['user_id'];
 
-    $name = $_POST['name'];
-    $type = $_POST['type'];
-    $level = $_POST['level'];
-    $status = $_POST['status'];
-    $rating = $_POST['rating'];
+    $name = trim($_POST['name']);
+    $type = trim($_POST['type']);
+    $level = trim($_POST['level']);
+    $status = trim($_POST['status']);
+    $rating = trim($_POST['rating']);
 
     if ($level < 1 || $level > 100) {
-        die("Invalid Pokémon level!");
-    } else {
-        // Image upload
-        $image_name = time() . "_" . $_FILES['image']['name'];
-        $temp_name = $_FILES['image']['tmp_name'];
-
-        $folder = "uploads/" . $image_name;
-
-        move_uploaded_file($temp_name, $folder);
-
-        // Insert into database
-        $sql = "INSERT INTO pokemon
-                (user_id, name, type, level, status, rating, image)
-
-                VALUES
-
-                ('$user_id', '$name', '$type',
-                '$level', '$status', '$rating', '$image_name')";
-
-        if (mysqli_query($conn, $sql)) {
-            echo "Pokémon Added Successfully!";
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }        
+        die("Pokémon level must be between 1 and 100.");
     }
+
+    if ($rating < 1 || $rating > 10) {
+       die("Rating must be between 1 and 10.");
+    }
+
+    $image_type = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+
+    $allowed_types = ['jpg', 'jpeg', 'png'];
+
+    if (!in_array($image_type, $allowed_types)) {
+        die("Only JPG, JPEG, and PNG files are allowed.");
+    }
+
+    if ($_FILES['image']['size'] > 2000000) {
+        die("Image size too large. 2MB max.");
+    }
+
+    // Image upload
+    $image_name = time() . "_" . $_FILES['image']['name'];
+    $temp_name = $_FILES['image']['tmp_name'];
+
+    $folder = "uploads/" . $image_name;
+
+    move_uploaded_file($temp_name, $folder);
+
+    // Insert into database
+    $sql = "INSERT INTO pokemon
+            (user_id, name, type, level, status, rating, image)
+
+            VALUES
+
+            ('$user_id', '$name', '$type',
+            '$level', '$status', '$rating', '$image_name')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Pokémon Added Successfully!";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }        
 }
 ?>
 
