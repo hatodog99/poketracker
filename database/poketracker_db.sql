@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2026 at 07:37 PM
+-- Generation Time: May 21, 2026 at 04:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,7 +45,27 @@ CREATE TABLE `pokemon` (
 
 INSERT INTO `pokemon` (`id`, `user_id`, `name`, `type`, `level`, `status`, `rating`, `image`, `created_at`) VALUES
 (7, 1, 'Charmander', 'Fire', 1, 'Active', 1, '1779211428_70e4122c5c9ad3953bf4c4de90fa6da2.jpg', '2026-05-19 17:23:48'),
-(8, 1, 'Bulbasaur', 'Grass', 1, 'Active', 1, '1779211645_649793951_2484185198702561_5155173347306209027_n.jpg', '2026-05-19 17:27:25');
+(8, 1, 'Bulbasaur', 'Grass', 1, 'Active', 99, '1779211645_649793951_2484185198702561_5155173347306209027_n.jpg', '2026-05-19 17:27:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(20) DEFAULT 'user'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
+(1, 'hatdog', '$2y$10$tq8cMtmf0F533gUJjsqM0uQUP.fZo8o2tt1DYA0O3i.kZEmos1Wf6', 'user');
 
 --
 -- Indexes for dumped tables
@@ -59,6 +79,13 @@ ALTER TABLE `pokemon`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -67,6 +94,12 @@ ALTER TABLE `pokemon`
 --
 ALTER TABLE `pokemon`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
