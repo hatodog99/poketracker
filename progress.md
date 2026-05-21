@@ -16,6 +16,7 @@
 **✅ Completed:**
 - Agreed on a Pokemon tracker.
 - Decided on app features and functionalities.
+- Plan reference saved in [plan.md](plan.md)
 
 **📝 Notes/Challenges:**
 - Finalizing of roles, answering of forms.
