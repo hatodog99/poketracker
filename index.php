@@ -1,18 +1,72 @@
+<?php
+include 'includes/connection.php';
+
+$sql = "SELECT pokemon.*, users.username
+        FROM pokemon
+
+        JOIN users
+        ON pokemon.user_id = users.id
+
+        ORDER BY pokemon.created_at DESC";
+
+$result = mysqli_query($conn, $sql);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PokéVault</title>
+    <title>PokéTracker</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
 <div class="navbar">
-    <h1>PokéTracker</h1>
+    <h1>PokéTracker Community</h1>
+
+    <div class="nav-links">
+
+        <a href="auth/login.php">Login</a>
+
+        <a href="auth/register.php">Register</a>
+
+    </div>
 </div>
 
 <div class="container">
-    <h2>Welcome Trainer!</h2>
-    <p>Your Pokémon collection tracker.</p>
+
+    <h2>Recent Pokémon Collections</h2>
+
+    <div class="pokemon-container">
+
+        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+
+            <div class="pokemon-card">
+
+                <img src="uploads/<?php echo $row['image']; ?>">
+
+                <h2><?php echo $row['name']; ?></h2>
+
+                <p>Trainer:
+                <?php echo $row['username']; ?></p>
+
+                <p>Type:
+                <?php echo $row['type']; ?></p>
+
+                <p>Level:
+                <?php echo $row['level']; ?></p>
+
+                <p>Status:
+                <?php echo $row['status']; ?></p>
+
+                <p>Rating:
+                <?php echo $row['rating']; ?>/10</p>
+
+            </div>
+
+        <?php } ?>
+
+    </div>
+
 </div>
 
 </body>

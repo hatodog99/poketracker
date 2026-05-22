@@ -15,15 +15,14 @@ $sql = "DELETE FROM pokemon
         AND user_id='{$_SESSION['user_id']}'";
 
 if (mysqli_query($conn, $sql)) {
-
-    header("Location: collection.php");
+    header("Location: delete-pokemon.php");
     exit();
 
 } else {
-
+    
     echo "Error: " . mysqli_error($conn);
 
-}
+    }
 ?>
 
 <a href="edit-pokemon.php?id=<?php echo $row['id']; ?>">
