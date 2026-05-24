@@ -14,6 +14,8 @@ if (isset($_POST['register'])) {
 
     if (mysqli_query($conn, $sql)) {
         echo "Registration Successful!";
+
+        header("Location: login.php");
     } else {
         echo "Error: " . mysqli_error($conn);
     }
