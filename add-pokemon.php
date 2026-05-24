@@ -74,63 +74,72 @@ if (isset($_POST['add_pokemon'])) {
 </head>
 <body>
 
-<h2>Add Pokémon</h2>
+    <div class="nav">
+        <a href="index.php">Home</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="add-pokemon.php">Add Pokémon</a>
+        <a href="auth/logout.php">Logout</a>
+    </div>
 
-<form method="POST" enctype="multipart/form-data">
+    <hr>
 
-    <input type="text"
-           name="name"
-           placeholder="Pokémon Name"
-           required>
+    <h2>Add Pokémon</h2>
 
-    <br><br>
+    <form method="POST" enctype="multipart/form-data">
 
-    <select name="type" required>
-        <option value="">Select Type</option>
-        <option>Fire</option>
-        <option>Water</option>
-        <option>Grass</option>
-        <option>Electric</option>
-        <option>Psychic</option>
-        <option>Dragon</option>
-    </select>
+        <input type="text"
+            name="name"
+            placeholder="Pokémon Name"
+            required>
 
-    <br><br>
+        <br><br>
 
-    <input type="number"
-           name="level"
-           placeholder="Level"
-           required>
+        <select name="type" required>
+            <option value="">Select Type</option>
+            <option>Fire</option>
+            <option>Water</option>
+            <option>Grass</option>
+            <option>Electric</option>
+            <option>Psychic</option>
+            <option>Dragon</option>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <select name="status">
-        <option>Active</option>
-        <option>Stored</option>
-        <option>Favorite</option>
-    </select>
+        <input type="number"
+            name="level"
+            placeholder="Level"
+            required>
 
-    <br><br>
+        <br><br>
 
-    <input type="number"
-           name="rating"
-           min="1"
-           max="10"
-           placeholder="Rating">
+        <select name="status">
+            <option>Active</option>
+            <option>Stored</option>
+            <option>Favorite</option>
+        </select>
 
-    <br><br>
+        <br><br>
 
-    <input type="file"
-           name="image"
-           required>
+        <input type="number"
+            name="rating"
+            min="1"
+            max="10"
+            placeholder="Rating">
 
-    <br><br>
+        <br><br>
 
-    <button type="submit" name="add_pokemon">
-        Add Pokémon
-    </button>
+        <input type="file"
+            name="image"
+            required>
 
-</form>
+        <br><br>
+
+        <button type="submit" name="add_pokemon">
+            Add Pokémon
+        </button>
+
+    </form>
 
 </body>
 </html>
