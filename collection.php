@@ -48,15 +48,10 @@ $result = mysqli_query($conn, $sql);
 <body>
 
     <div class="nav">
-
         <a href="index.php">Home</a>
-
         <a href="dashboard.php">Dashboard</a>
-
         <a href="add-pokemon.php">Add Pokémon</a>
-
         <a href="auth/logout.php">Logout</a>
-
     </div>
 
     <hr>
