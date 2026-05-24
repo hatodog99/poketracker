@@ -49,7 +49,7 @@ $result = mysqli_query($conn, $sql);
 
     <div class="nav">
 
-        <a href="inded.php">Home</a>
+        <a href="index.php">Home</a>
 
         <a href="dashboard.php">Dashboard</a>
 
