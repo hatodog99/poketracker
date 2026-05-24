@@ -132,6 +132,13 @@ $result = mysqli_query($conn, $sql);
             Edit
         </a>
 
+        <br><br>
+
+        <a href="delete-pokemon.php?id=<?php echo $row['id']; ?>"
+        onclick="return confirm('Release this Pokémon?')">
+            Release
+        </a>
+
     </div>
 
     <?php

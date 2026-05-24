@@ -10,28 +10,33 @@ include 'includes/connection.php';
 
 $id = $_GET['id'];
 
-$sql = "DELETE FROM pokemon
-        WHERE id='$id'
-        AND user_id='{$_SESSION['user_id']}'";
+$user_id = $_SESSION['user_id'];
 
-if (mysqli_query($conn, $sql)) {
-    header("Location: delete-pokemon.php");
-    exit();
+$get_sql = "SELECT image
+            FROM pokemon
+            WHERE id='$id'
+            AND user_id='$user_id'";
 
-} else {
-    
-    echo "Error: " . mysqli_error($conn);
+$get_result = mysqli_query($conn, $get_sql);
 
+$pokemon = mysqli_fetch_assoc($get_result);
+
+if ($pokemon) {
+
+    $image_path = "uploads/" . $pokemon['image'];
+
+    if (file_exists($image_path)) {
+        unlink($image_path);
     }
+
+    $delete_sql = "DELETE FROM pokemon
+                   WHERE id='$id'
+                   AND user_id='$user_id'";
+
+    mysqli_query($conn, $delete_sql);
+
+}
+
+header("Location: collection.php");
+exit();
 ?>
-
-<a href="edit-pokemon.php?id=<?php echo $row['id']; ?>">
-    Edit
-</a>
-
-<br><br>
-
-<a href="delete-pokemon.php?id=<?php echo $row['id']; ?>"
-   onclick="return confirm('Delete this Pokémon?')">
-    Delete
-</a>
