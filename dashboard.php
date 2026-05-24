@@ -39,7 +39,7 @@ $total_pokemon = $count_row['total'];
 
 <br>
 
-<a href="../index.php">Home</a>
+<a href="index.php">Home</a>
 
 <br><br>
 
