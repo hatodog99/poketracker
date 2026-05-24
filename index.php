@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'includes/connection.php';
 
 $sql = "SELECT pokemon.*, users.username
@@ -25,9 +27,28 @@ $result = mysqli_query($conn, $sql);
 
     <div class="nav-links">
 
+    <?php if (isset($_SESSION['user_id'])) { ?>
+
+        <a href="dashboard.php" class="username-link">
+            <?php echo $_SESSION['username']; ?>
+        </a>
+
+        <a href="dashboard.php">Dashboard</a>
+
+        <a href="collection.php">My Collection</a>
+
+        <a href="auth/logout.php"
+            onclick="return confirm('Logout?')">
+            Logout
+        </a>
+
+    <?php } else { ?>
+
         <a href="auth/login.php">Login</a>
 
         <a href="auth/register.php">Register</a>
+
+    <?php } ?>
 
     </div>
 </div>
