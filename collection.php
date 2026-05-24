@@ -49,6 +49,8 @@ $result = mysqli_query($conn, $sql);
 
     <div class="nav">
 
+        <a href="inded.php">Home</a>
+
         <a href="dashboard.php">Dashboard</a>
 
         <a href="add-pokemon.php">Add Pokémon</a>
