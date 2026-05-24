@@ -47,7 +47,10 @@ $total_pokemon = $count_row['total'];
 
 <br><br>
 
-<a href="auth/logout.php">Logout</a>
+<a href="auth/logout.php"
+    onclick="return confirm('Logout?')">
+    Logout
+</a>
 
 </body>
 </html>
