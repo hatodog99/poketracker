@@ -1,10 +1,18 @@
 :root {
-    --bg: #08101d;
-    --panel: rgba(17, 27, 51, 0.95);
-    --panel-border: rgba(255, 255, 255, 0.08);
-    --text: #f5f7ff;
-    --muted: #b6c4e0;
-    --accent: #ffcb05;
+    /* GBA Pokémon Fire Red inspired palette */
+    --gba-green: #5ab54f;
+    --gba-dark-green: #3a7f3f;
+    --gba-red: #ff6b6b;
+    --gba-orange: #ffb347;
+    --gba-yellow: #ffd700;
+    --gba-blue: #4dabf7;
+    --gba-cyan: #69db7c;
+    --gba-purple: #da77f2;
+    --gba-light: #e8f5e9;
+    --gba-dark: #1b5e20;
+    --gba-text: #1a1a1a;
+    --gba-text-light: #ffffff;
+    --accent: #ffd700;
     --accent-dark: #e0a400;
 }
 
@@ -12,47 +20,80 @@
     box-sizing: border-box;
 }
 
+/* Pixel font for retro feel */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
     margin: 0;
     padding: 24px 20px 40px;
     min-height: 100vh;
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: radial-gradient(circle at 20% 10%, rgba(255, 203, 5, 0.18), transparent 20%),
-                radial-gradient(circle at 80% 20%, rgba(58, 166, 255, 0.12), transparent 18%),
-                linear-gradient(180deg, #060b14 0%, #0b1728 100%);
-    color: var(--text);
+    font-family: "Press Start 2P", "MS Sans Serif", system-ui, sans-serif;
+    background: #ffffff;
+    background-attachment: fixed;
+    color: var(--gba-text);
+    position: relative;
+    overflow-x: hidden;
 }
 
+/* GBA screen-like effect with scanlines */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.04), transparent 18%);
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.08),
+        rgba(0, 0, 0, 0.08) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    z-index: 9999;
+}
+
+/* Pixel grid pattern */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: 
+        linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.05) 75%, rgba(255, 255, 255, 0.05) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
     z-index: -1;
 }
 
 img {
     max-width: 100%;
     display: block;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
 }
 
+/* Retro GBA style borders */
 .navbar {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: rgba(8, 16, 29, 0.94);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, #8bc34a 0%, #5ab54f 100%);
+    border: 4px solid #2d6a2d;
+    border-bottom: 6px solid #1b5e20;
     padding: 18px 32px;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .navbar h1 {
     margin: 0;
-    font-size: 1.6rem;
-    letter-spacing: 0.1em;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--gba-text);
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5),
+                 -1px -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .nav {
@@ -63,25 +104,44 @@ img {
     padding: 18px 24px;
     margin: 24px auto;
     max-width: 1040px;
-    background: rgba(8, 16, 29, 0.94);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
+    background: linear-gradient(180deg, #8bc34a 0%, #5ab54f 100%);
+    border: 4px solid #2d6a2d;
+    border-radius: 0;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .nav a {
-    color: var(--text);
+    color: var(--gba-text);
     text-decoration: none;
-    padding: 12px 18px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 999px;
-    font-weight: 600;
-    transition: transform 0.2s ease, background 0.2s ease;
+    padding: 10px 16px;
+    background: linear-gradient(180deg, #c5e1a5 0%, #9ccc65 100%);
+    border: 3px solid #558b2f;
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 0 #558b2f;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .nav a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-1px);
+    background: linear-gradient(180deg, #dcedc8 0%, #aed581 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 6px 0 #558b2f;
+}
+
+.nav a:active {
+    transform: translateY(2px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+                0 1px 0 #558b2f;
 }
 
 .container {
@@ -93,27 +153,32 @@ img {
 h1, h2, h3, h4 {
     margin: 0 0 18px;
     font-weight: 700;
-    letter-spacing: 0.01em;
+    letter-spacing: 1px;
+    color: var(--gba-text);
+    text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5),
+                 -1px -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
 }
 
 h2 {
-    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-    color: var(--text);
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    color: var(--gba-text);
 }
 
 p {
     margin: 0 0 16px;
-    color: var(--muted);
+    color: var(--gba-text);
     line-height: 1.75;
+    font-size: 0.75rem;
 }
 
 hr {
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid var(--gba-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     margin: 32px auto;
     width: 100%;
     max-width: 1120px;
@@ -123,10 +188,12 @@ form {
     max-width: 520px;
     margin: 24px auto;
     padding: 28px 26px 24px;
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    border-radius: 24px;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+    background: linear-gradient(180deg, #c5e1a5 0%, #9ccc65 100%);
+    border: 4px solid #558b2f;
+    border-radius: 0;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+                0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 input,
@@ -138,13 +205,16 @@ button {
 input,
 select {
     width: 100%;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--text);
-    padding: 14px 16px;
+    border-radius: 0;
+    border: 3px solid #558b2f;
+    background-color: #f1f8e9;
+    color: var(--gba-text);
+    padding: 12px 14px;
     margin-top: 10px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: border-color 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+    font-size: 0.75rem;
 }
 
 select {
@@ -152,11 +222,11 @@ select {
     -moz-appearance: none;
     appearance: none;
     padding-right: 40px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='rgba(181,196,224,0.7)' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23558b2f' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
     background-size: 12px 8px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: #f1f8e9;
 }
 
 select::-ms-expand {
@@ -164,13 +234,13 @@ select::-ms-expand {
 }
 
 select option {
-    color: var(--text);
-    background: #0b1728;
+    color: var(--gba-text);
+    background: #dcedc8;
 }
 
 input[type="number"] {
     padding-right: 12px;
-    color-scheme: dark;
+    color-scheme: light;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -178,48 +248,58 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: spinbutton;
     opacity: 1;
     width: 28px;
-    filter: invert(1) hue-rotate(180deg) saturate(0.5);
 }
 
 input[type="file"] {
     width: 100%;
     padding: 12px 14px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    color: var(--text);
+    background: #f1f8e9;
+    border: 3px solid #558b2f;
+    border-radius: 0;
+    color: var(--gba-text);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.1);
 }
 
 input[type="file"]::-webkit-file-upload-button {
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text);
-    border-radius: 12px;
+    border: 2px solid #558b2f;
+    background: linear-gradient(180deg, #dcedc8 0%, #c5e1a5 100%);
+    color: var(--gba-text);
+    border-radius: 0;
     padding: 10px 14px;
     margin-right: 8px;
     cursor: pointer;
+    font-weight: 700;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 2px 0 #558b2f;
 }
 
 input[type="file"]::-moz-file-upload-button {
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text);
-    border-radius: 12px;
+    border: 2px solid #558b2f;
+    background: linear-gradient(180deg, #dcedc8 0%, #c5e1a5 100%);
+    color: var(--gba-text);
+    border-radius: 0;
     padding: 10px 14px;
     cursor: pointer;
+    font-weight: 700;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 2px 0 #558b2f;
 }
 
 input:focus,
 select:focus,
 input[type="file"]:focus {
     outline: none;
-    border-color: rgba(255, 203, 5, 0.6);
-    background-color: rgba(255, 255, 255, 0.08);
-    color: var(--text);
+    border-color: #f57f17;
+    background-color: #fffde7;
+    color: var(--gba-text);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+                0 0 0 4px rgba(255, 179, 71, 0.3);
 }
 
 select:focus {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='rgba(255,203,5,0.8)' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23f57f17' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
     background-size: 12px 8px;
@@ -227,9 +307,9 @@ select:focus {
 
 select:hover,
 input[type="file"]:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: var(--text);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='rgba(181,196,224,0.9)' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-color: #fffde7;
+    color: var(--gba-text);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23558b2f' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
     background-size: 12px 8px;
@@ -240,116 +320,237 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, var(--accent), #ffb347);
-    color: #08101d;
-    padding: 14px 24px;
+    border: 4px solid #558b2f;
+    border-radius: 0;
+    background: linear-gradient(180deg, #dcedc8 0%, #9ccc65 100%);
+    color: var(--gba-text);
+    padding: 12px 24px;
     margin-top: 18px;
     font-weight: 700;
-    letter-spacing: 0.01em;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+                0 6px 0 #558b2f;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
 button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 18px 32px rgba(255, 203, 5, 0.18);
-    opacity: 0.98;
+    background: linear-gradient(180deg, #e8f5e9 0%, #aed581 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+                0 8px 0 #558b2f;
+}
+
+button:active {
+    transform: translateY(4px);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+                0 0px 0 #558b2f;
 }
 
 a {
-    color: var(--text);
+    color: var(--gba-text);
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 }
 
 a:not(.pokemon-card a) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 18px;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: var(--text);
-    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 0;
+    background: linear-gradient(180deg, #dcedc8 0%, #9ccc65 100%);
+    border: 3px solid #558b2f;
+    color: var(--gba-text);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 4px 0 #558b2f;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 a:not(.pokemon-card a):hover {
-    background: rgba(255, 255, 255, 0.14);
-    transform: translateY(-1px);
+    background: linear-gradient(180deg, #e8f5e9 0%, #aed581 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 6px 0 #558b2f;
+}
+
+a:not(.pokemon-card a):active {
+    transform: translateY(2px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 1px 0 #558b2f;
 }
 
 .pokemon-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
+    gap: 32px;
     margin: 24px 0;
+    justify-items: start;
+    align-content: start;
+}
+
+body.index-page .pokemon-container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    justify-items: stretch;
+}
+
+body.index-page .pokemon-card {
+    width: 100%;
+    min-height: 460px;
 }
 
 .pokemon-card {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding: 20px;
-    background: rgba(16, 28, 57, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    padding: 16px;
+    width: 300px;
+    min-height: 540px;
+    background: linear-gradient(135deg, #c5e1a5 0%, #aed581 100%);
+    border: 4px solid #558b2f;
+    border-radius: 0;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 0 0 2px #5ab54f;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
+    position: relative;
+}
+
+.pokemon-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    border-radius: 0;
 }
 
 .pokemon-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255, 203, 5, 0.28);
+    transform: translateY(-4px);
+    border-color: #111111;
+    box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.18),
+                0 12px 20px rgba(0, 0, 0, 0.28);
 }
 
 .pokemon-card img {
-    height: 210px;
+    width: 100%;
+    height: 220px;
     object-fit: cover;
-    border-radius: 18px;
+    object-position: center;
+    border-radius: 0;
+    border: 2px solid #558b2f;
+    background: #f1f8e9;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+}
+
+body.index-page .pokemon-card img {
+    height: 230px;
 }
 
 .pokemon-card h2 {
     margin: 0;
-    font-size: 1.35rem;
+    font-size: 1.1rem;
+    color: var(--gba-text);
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .pokemon-card p {
     margin: 0;
-    color: var(--muted);
+    color: #2d6a2d;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    line-height: 1.4;
 }
 
 .pokemon-card a {
     display: inline-block;
     align-self: flex-start;
     margin-top: auto;
-    padding: 12px 18px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: 14px;
-    transition: background 0.2s ease, transform 0.2s ease;
+    padding: 8px 12px;
+    background: linear-gradient(180deg, #fff9c4 0%, #ffe082 100%);
+    border: 3px solid #111111;
+    border-radius: 0;
+    transition: all 0.1s ease;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #1f1f1f;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 3px 0 #111111;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .pokemon-card a:hover {
-    background: rgba(255, 255, 255, 0.14);
-    transform: translateY(-1px);
+    background: linear-gradient(180deg, #ffff8d 0%, #ffeb3b 100%);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 5px 0 #f57f17;
+}
+
+.pokemon-card a:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 1px 0 #f57f17;
 }
 
 .fire {
-    background: linear-gradient(135deg, #ff9d43, #ffd068);
-    color: #102037;
+    background: linear-gradient(135deg, #ffb74d, #ff9800);
+    color: #fff;
+}
+
+.fire::before {
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .water {
-    background: linear-gradient(135deg, #4aa9ff, #80d8ff);
-    color: #08101d;
+    background: linear-gradient(135deg, #64b5f6, #1976d2);
+    color: #fff;
+}
+
+.water::before {
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .grass {
-    background: linear-gradient(135deg, #5cdc8a, #b5ffab);
-    color: #08101d;
+    background: linear-gradient(135deg, #81c784, #388e3c);
+    color: #fff;
+}
+
+.grass::before {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Additional type colors for variety */
+.electric {
+    background: linear-gradient(135deg, #fdd835, #fbc02d);
+    color: #1a1a1a;
+}
+
+.psychic {
+    background: linear-gradient(135deg, #f06292, #c2185b);
+    color: #fff;
+}
+
+.flying {
+    background: linear-gradient(135deg, #90caf9, #1e88e5);
+    color: #fff;
+}
+
+.fighting {
+    background: linear-gradient(135deg, #ef5350, #c62828);
+    color: #fff;
 }
 
 @media (max-width: 768px) {
@@ -362,5 +563,38 @@ a:not(.pokemon-card a):hover {
 
     form {
         margin: 20px 0;
+        padding: 20px 18px;
+    }
+
+    .pokemon-container {
+        gap: 20px;
+    }
+
+    .pokemon-card {
+        padding: 12px;
+        min-height: 500px;
+    }
+
+    body.index-page .pokemon-card {
+        min-height: 520px;
+    }
+
+    h1 {
+        font-size: 1.1rem;
+    }
+
+    h2 {
+        font-size: 0.9rem;
+    }
+
+    p {
+        font-size: 0.7rem;
+    }
+
+    button,
+    .nav a,
+    a:not(.pokemon-card a) {
+        font-size: 0.7rem;
+        padding: 8px 12px;
     }
 }

@@ -20,7 +20,7 @@ $result = mysqli_query($conn, $sql);
     <title>PokéTracker</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="index-page">
 
 <div class="navbar">
     <h1>PokéTracker Community</h1>
