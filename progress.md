@@ -73,6 +73,23 @@
 - Implemented feature where other user's can see each other's Pokemon collection.
 
 ---
+
+### Day 7 - May 25, 2026 (Monday)
+
+**✅ Accomplished:**
+- Added navigation bar to add Pokemon page.
+- Added logout button to navigation bar.
+- Logout and login now redirect to homepage.
+- Register button now redirects user to login.
+- Bug fixes
+  - Fixed an issue where users were unable to delete/release Pokémon because the release button was not visible. Users can now release Pokémon properly.
+  - Fixed bug where uploaded Pokémon images were not removed after release.
+- Discussion on main theme. Two options were presented.
+  - Retro, old generation style
+  - Modern, new generation style
+- Decided on theme: Retro, old generation style.
+
+---
 TBA familia
 
 <img width="168" height="299" alt="image" src="https://github.com/user-attachments/assets/5e561eeb-4141-45d4-b0f3-8e4ee3fdf63f" />
