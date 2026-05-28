@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 26, 2026 at 07:48 AM
+-- Generation Time: May 28, 2026 at 04:00 PM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -31,16 +31,16 @@ DROP TABLE IF EXISTS `pokemon`;
 CREATE TABLE IF NOT EXISTS `pokemon` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `type` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `level` int DEFAULT NULL,
-  `status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `rating` int DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pokemon`
@@ -51,7 +51,8 @@ INSERT INTO `pokemon` (`id`, `user_id`, `name`, `type`, `level`, `status`, `rati
 (8, 1, 'Bulbasaur', 'Grass', 1, 'Active', 99, '1779211645_649793951_2484185198702561_5155173347306209027_n.jpg', '2026-05-19 17:27:25'),
 (10, 4, 'Virizion', 'Grass', 50, 'Stored', 7, '1779773918_miffy.jpg', '2026-05-26 05:38:38'),
 (11, 4, 'Gallade', 'Psychic', 40, 'Stored', 10, '1779774975_908.png', '2026-05-26 05:56:15'),
-(12, 4, 'Folk', 'Dragon', 99, 'Favorite', 10, '1779776335_wassup.png', '2026-05-26 06:18:55');
+(12, 4, 'Folk', 'Dragon', 99, 'Favorite', 10, '1779776335_wassup.png', '2026-05-26 06:18:55'),
+(13, 4, 'Fluttershy', 'Psychic', 67, 'In PC Box', 10, '1779981438_655.png', '2026-05-28 15:17:18');
 
 -- --------------------------------------------------------
 
@@ -62,12 +63,12 @@ INSERT INTO `pokemon` (`id`, `user_id`, `name`, `type`, `level`, `status`, `rati
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `role` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'user',
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'user',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -75,7 +76,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
 (1, 'hatdog', '$2y$10$tq8cMtmf0F533gUJjsqM0uQUP.fZo8o2tt1DYA0O3i.kZEmos1Wf6', 'user'),
-(4, 'jhayzer07', '$2y$10$2JgWJ4at9tXU7/36Q/2um.yFjA2qGyB.yPrf34ochRRmzhkDL4BS.', 'user');
+(4, 'jhayzer07', '$2y$10$2JgWJ4at9tXU7/36Q/2um.yFjA2qGyB.yPrf34ochRRmzhkDL4BS.', 'user'),
+(5, 'jhayzordex', '$2y$10$F.YlOihx2OlK9vDdgzg6sOFbhqLxxUnQdBzNvpxYhLEmgLYXJAknm', 'user');
 
 --
 -- Constraints for dumped tables
