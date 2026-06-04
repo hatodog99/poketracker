@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jun 04, 2026 at 03:17 PM
--- Server version: 8.4.7
--- PHP Version: 8.3.28
+-- Host: 127.0.0.1
+-- Generation Time: Jun 04, 2026 at 08:28 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,17 +27,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `pokemon_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `comment_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `pokemon_id` (`pokemon_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `pokemon_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `comment_text` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `comments`
@@ -61,35 +57,33 @@ INSERT INTO `comments` (`id`, `pokemon_id`, `user_id`, `comment_text`, `created_
 -- Table structure for table `pokemon`
 --
 
-DROP TABLE IF EXISTS `pokemon`;
-CREATE TABLE IF NOT EXISTS `pokemon` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `level` int DEFAULT NULL,
-  `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Male',
-  `image1` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upvotes` int DEFAULT '0',
-  `species_id` int DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '',
-  `image2` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
-  `image3` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
-  `image4` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
-  `image5` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `pokemon` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `gender` varchar(10) NOT NULL DEFAULT 'Male',
+  `image1` varchar(255) DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `upvotes` int(11) DEFAULT 0,
+  `species_id` int(11) DEFAULT NULL,
+  `description` varchar(255) DEFAULT '',
+  `image2` varchar(255) DEFAULT '',
+  `image3` varchar(255) DEFAULT '',
+  `image4` varchar(255) DEFAULT '',
+  `image5` varchar(255) DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pokemon`
 --
 
 INSERT INTO `pokemon` (`id`, `user_id`, `nickname`, `level`, `gender`, `image1`, `created_at`, `upvotes`, `species_id`, `description`, `image2`, `image3`, `image4`, `image5`) VALUES
-(15, 1, '', 42, 'Male', '1780345481_images.jpg', '2026-06-01 20:24:41', 1, 448, '', '1780583632_2_d24c4a334d137f78.png', '', '', ''),
+(15, 1, '', 42, 'Male', '1780597105_1_images.jpg', '2026-06-01 20:24:41', 1, 448, '', '', '', '', ''),
 (16, 1, 'butiki', 21, 'Male', '1780345965_70e4122c5c9ad3953bf4c4de90fa6da2.jpg', '2026-06-01 20:32:45', 1, 4, 'aaaa aaaaa a a a a a a  a a a a aa a a  a a a a  a  a a a  a    a a a a a a  a a  a  a  a  a  a  a  a  a  a a a aaaaaaaaa a a  a a  a a a a  a  a  a', '', '', '', ''),
 (18, 5, 'Miffyy', 67, 'Female', '1780476366_miffy.jpg', '2026-06-03 08:46:06', 2, 40, 'guys nahuli kotong pokemon nato sa bahay namin napakacute sobra gusto ko lang ishare pls paupvote narin para top 1 hehe', '1780571847_2_255.png', '', '', ''),
-(20, 1, 'gento', 100, 'Male', '1780496965_water.png', '2026-06-03 14:29:25', 1, 1000, 'dwadawdadadsa  dasdsada ada dsa dad a da d ad ad a da da d ad a da da d a da da da da d ad ad ad a d a d a da da da d as d asd a  d a da da da da d a', '1780568531_2_156.png', '1780568531_3_260.png', '', '');
+(20, 1, 'gento', 100, 'Male', '1780496965_water.png', '2026-06-03 14:29:25', 1, 1000, 'dwadawdadadsa  dasdsada ada dsa dad a da d ad ad a da da d ad a da da d a da da da da d ad ad ad a d a d a da da da d as d asd a  d a da da da da d a', '1780568531_2_156.png', '1780568531_3_260.png', '', '1780583181_5_f4a0caba-3ffe-409c-8ae4-73feb6ead178.png'),
+(24, 1, 'Gyarubasaur', 16, 'Female', '1780597193_1_649793951_2484185198702561_5155173347306209027_n.jpg', '2026-06-04 18:19:53', 1, 1, 'bulbasaur pero gyaru', '1780597193_2_FacaoTiXoAAIU6O.jpg', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -97,8 +91,7 @@ INSERT INTO `pokemon` (`id`, `user_id`, `nickname`, `level`, `gender`, `image1`,
 -- Table structure for table `pokemon_dex`
 --
 
-DROP TABLE IF EXISTS `pokemon_dex`;
-CREATE TABLE IF NOT EXISTS `pokemon_dex` (
+CREATE TABLE `pokemon_dex` (
   `id` varchar(4) DEFAULT NULL,
   `name` varchar(16) DEFAULT NULL,
   `form` varchar(22) DEFAULT NULL,
@@ -113,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `pokemon_dex` (
   `speed` varchar(5) DEFAULT NULL,
   `generation` varchar(10) DEFAULT NULL,
   `sprite` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `pokemon_dex`
@@ -1344,15 +1337,11 @@ INSERT INTO `pokemon_dex` (`id`, `name`, `form`, `type1`, `type2`, `total`, `hp`
 -- Table structure for table `pokemon_votes`
 --
 
-DROP TABLE IF EXISTS `pokemon_votes`;
-CREATE TABLE IF NOT EXISTS `pokemon_votes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `pokemon_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_vote` (`pokemon_id`,`user_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `pokemon_votes` (
+  `id` int(11) NOT NULL,
+  `pokemon_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pokemon_votes`
@@ -1363,7 +1352,8 @@ INSERT INTO `pokemon_votes` (`id`, `pokemon_id`, `user_id`) VALUES
 (5, 16, 4),
 (19, 18, 1),
 (16, 18, 5),
-(31, 20, 1);
+(31, 20, 1),
+(36, 24, 1);
 
 -- --------------------------------------------------------
 
@@ -1371,27 +1361,86 @@ INSERT INTO `pokemon_votes` (`id`, `pokemon_id`, `user_id`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'user',
-  `card_theme` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'blue',
-  `bio` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
-  `sticker_id` int DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(20) DEFAULT 'user',
+  `card_theme` varchar(50) DEFAULT 'blue',
+  `bio` varchar(255) DEFAULT '',
+  `sticker_id` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `card_theme`, `bio`, `sticker_id`) VALUES
-(1, 'hatdog', '$2y$10$tq8cMtmf0F533gUJjsqM0uQUP.fZo8o2tt1DYA0O3i.kZEmos1Wf6', 'user', 'gold', 'Hi guys ako pala si paul at ako ay isang chill guy na maangas at malupit at pinakamalakas sa buong mundo ahahasjdahdwadghagdjywagdyhuagfdhawfg dhawdah', 1008),
+(1, 'hatdog', '$2y$10$tq8cMtmf0F533gUJjsqM0uQUP.fZo8o2tt1DYA0O3i.kZEmos1Wf6', 'user', 'gold', 'Hi guys ako pala si paul at ako ay isang chill guy na maangas at malupit at pinakamalakas sa buong mundo ahahasjdahdwadghagdjywagdyhuagfdhawfg dhawdah', 6),
 (4, 'jhayzer07', '$2y$10$2JgWJ4at9tXU7/36Q/2um.yFjA2qGyB.yPrf34ochRRmzhkDL4BS.', 'user', 'gold', 'ALien', 386),
 (5, 'jhayzordex', '$2y$10$F.YlOihx2OlK9vDdgzg6sOFbhqLxxUnQdBzNvpxYhLEmgLYXJAknm', 'user', 'green', 'pinaka astig at pinakamalakas na trainer', 384);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pokemon_id` (`pokemon_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `pokemon`
+--
+ALTER TABLE `pokemon`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `pokemon_votes`
+--
+ALTER TABLE `pokemon_votes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_vote` (`pokemon_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `pokemon`
+--
+ALTER TABLE `pokemon`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `pokemon_votes`
+--
+ALTER TABLE `pokemon_votes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
