@@ -13,7 +13,7 @@ $sort    = isset($_GET['sort']) ? $_GET['sort'] : "recent";
 // 1. Process dynamic sorting selection
 $order_by = "pokemon.created_at DESC"; 
 if ($sort === 'pokedex') {
-    $order_by = "pokemon_dex.id ASC, pokemon.created_at DESC";
+    $order_by = "CAST(pokemon_dex.id AS UNSIGNED) ASC, pokemon.created_at DESC";
 } elseif ($sort === 'level') {
     $order_by = "pokemon.level DESC, pokemon.created_at DESC";
 } elseif ($sort === 'upvotes') {
