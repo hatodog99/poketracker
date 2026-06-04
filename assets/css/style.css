@@ -211,7 +211,7 @@ img {
 .detail-thumbnail-img { display:none; max-width:100%; border-radius:6px; }
 .detail-header-row { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
 .detail-sprite-img { display:none; image-rendering:pixelated; width:90px; height:90px; flex-shrink:0; }
-.pkmn-name-row { margin:0; }
+.pkmn-name-row { margin:0; font-size: 0.8rem; white-space: nowrap; overflow: hidden; }
 .pkmn-species-info { font-size:0.65rem; opacity:0.8; margin: 4px 0 0 0; }
 .detail-types-container { margin-bottom: 12px; display: flex; gap: 6px; }
 

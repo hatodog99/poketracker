@@ -259,6 +259,7 @@ function updateDetails(element) {
     
     document.getElementById('detail-pokedex').innerText = pokedex;
 
+    const displayName = nickname ? nickname : species;
     if (nickname) {
         document.getElementById('detail-nickname').innerText = nickname;
         document.getElementById('detail-species').innerText  = species;
@@ -266,6 +267,14 @@ function updateDetails(element) {
         document.getElementById('detail-nickname').innerText = species;
         document.getElementById('detail-species').innerText  = '';
     }
+
+    // Scale nickname font size down for longer names
+    const nameRow = document.querySelector('.pkmn-name-row');
+    const len = displayName.length;
+    if (len <= 10)       nameRow.style.fontSize = '0.8rem';
+    else if (len <= 14)  nameRow.style.fontSize = '0.65rem';
+    else if (len <= 18)  nameRow.style.fontSize = '0.55rem';
+    else                 nameRow.style.fontSize = '0.45rem';
     
     const genderEl = document.getElementById('detail-gender');
     genderEl.innerText = element.getAttribute('data-gendericon');
