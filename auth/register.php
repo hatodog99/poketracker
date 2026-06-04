@@ -1,67 +1,94 @@
 <?php
+session_start();
+
+// If they are already logged in, redirect them back to the homepage
+if (isset($_SESSION['user_id'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+// Adjusted file path to go one folder up to include connection
 include '../includes/connection.php';
 
 $sys_message = "";
 $msg_type = "";
 
 if (isset($_POST['register'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    
+    // Safely sanitizes the inputs against SQL injections and quotes
+    $username = mysqli_real_escape_string($conn, trim($_POST['username']));
+    $password = mysqli_real_escape_string($conn, trim($_POST['password']));
 
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
-
-    if (mysqli_query($conn, $sql)) {
-        header("Location: login.php?registered=success");
-        exit();
-    } else {
-        $sys_message = "System Error: " . mysqli_error($conn);
+    if (empty($username) || empty($password)) {
+        $sys_message = "All fields are required.";
         $msg_type = "error";
+    } else {
+        
+        // 1. THE CHECK GATE: Look for existing users with this exact name
+        $check_sql = "SELECT id FROM users WHERE username = '$username'";
+        $check_result = mysqli_query($conn, $check_sql);
+        
+        if (mysqli_num_rows($check_result) > 0) {
+            // 2. THE INTERCEPTION: If row exists, stop execution and save a friendly error
+            $sys_message = "This Trainer Name is already taken!";
+            $msg_type = "error";
+        } else {
+            
+            // 3. THE INSERTION: If name is unique, safely insert them into the database
+            // Note: Stored as plain-text to maintain 100% compatibility with your current login.php query
+            $insert_sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+            
+            if (mysqli_query($conn, $insert_sql)) {
+                $sys_message = "Account created! You can now log in.";
+                $msg_type = "success";
+            } else {
+                $sys_message = "System Error: " . mysqli_error($conn);
+                $msg_type = "error";
+            }
+        }
     }
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Trainer Registration</title>
+    <title>Trainer Registration - PC System</title>
+    <!-- Relative path to stylesheet -->
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .sys-message {
-            background: var(--dialogue-bg); border: 4px solid var(--dialogue-border-outer);
-            border-radius: 8px; box-shadow: inset 0 0 0 2px #ffffff, inset 0 0 0 4px var(--dialogue-border-inner), 4px 4px 0 rgba(0,0,0,0.15);
-            max-width: 500px; margin: 0 auto 24px auto; padding: 16px 24px; font-size: 0.8rem; line-height: 1.6;
-        }
-        .sys-message.error { color: var(--gba-red); text-shadow: 1px 1px 0 #ffb0b0;}
-        .form-title {
-            margin-top: 0; margin-bottom: 24px; font-size: 1rem; text-align: center; color: var(--gba-text);
-            text-shadow: 2px 2px 0 var(--gba-text-shadow); border-bottom: 4px dotted var(--dialogue-border-inner); padding-bottom: 16px;
-        }
-    </style>
 </head>
 <body>
 
-<div class="navbar">
+<!-- Dynamic active page highlighting in auth subfolder -->
+<?php $active_page = basename($_SERVER['PHP_SELF']); ?>
+<div class="navbar" style="width: 100%; max-width: 1200px; margin: 24px auto;">
     <h1>PokéTracker</h1>
     <div class="nav-links">
         <a href="../index.php">Home</a>
-        <a href="login.php">Login</a>
+        <a href="login.php" class="<?php echo $active_page == 'login.php' ? 'active' : ''; ?>">Login</a>
+        <a href="register.php" class="<?php echo $active_page == 'register.php' ? 'active' : ''; ?>">Register</a>
     </div>
 </div>
 
-<?php if ($sys_message != ""): ?>
-    <div class="sys-message <?php echo $msg_type; ?>">
-        ▶ <?php echo $sys_message; ?>
-    </div>
-<?php endif; ?>
+<div class="container">
+    <!-- Dialogue box showing the retro warning messages -->
+    <?php if ($sys_message != ""): ?>
+        <div class="sys-message <?php echo $msg_type; ?>" style="max-width: 440px; margin: 0 auto 24px auto;">
+            ▶ <?php echo $sys_message; ?>
+        </div>
+    <?php endif; ?>
 
-<form method="POST">
-    <h2 class="form-title">NEW TRAINER REGISTRATION</h2>
-    <label>Choose a Username:</label>
-    <input type="text" name="username" placeholder="Username" required>
-    <label>Choose a Password:</label>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit" name="register">REGISTER TRAINER</button>
-</form>
+    <form method="POST" style="max-width: 440px; margin: 0 auto;">
+        <h2 class="form-title">CREATE ACCOUNT</h2>
+
+        <label>Trainer Username:</label>
+        <input type="text" name="username" placeholder="Choose a name..." required autocomplete="off">
+
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Choose a password..." required>
+
+        <button type="submit" name="register">REGISTER</button>
+    </form>
+</div>
 
 </body>
 </html>

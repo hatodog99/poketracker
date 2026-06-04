@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 03, 2026 at 03:13 PM
+-- Generation Time: Jun 04, 2026 at 03:17 PM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -24,6 +24,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pokemon_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `comment_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `pokemon_id` (`pokemon_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `pokemon_id`, `user_id`, `comment_text`, `created_at`) VALUES
+(1, 20, 1, 'hi guys lalaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '2026-06-04 10:41:31'),
+(2, 20, 1, 'wadada', '2026-06-04 10:41:34'),
+(3, 20, 4, 'pangit naman nyan', '2026-06-04 10:42:00'),
+(4, 18, 1, 'pano naging top 1 to gago', '2026-06-04 10:54:50'),
+(5, 18, 1, 'lala mas maganda yung second e', '2026-06-04 10:54:58'),
+(6, 18, 4, 'tangina pangit gago', '2026-06-04 10:55:12'),
+(7, 18, 5, 'gago kung ano ano nalang inuupvote nyo lala', '2026-06-04 10:55:49'),
+(8, 15, 5, 'eto ba yung mas maganda e pangit rin to e', '2026-06-04 10:57:30'),
+(9, 18, 5, '3192391!!;\'', '2026-06-04 10:58:26'),
+(11, 20, 1, 'e', '2026-06-04 13:57:48');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pokemon`
 --
 
@@ -31,27 +65,31 @@ DROP TABLE IF EXISTS `pokemon`;
 CREATE TABLE IF NOT EXISTS `pokemon` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `nickname` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `level` int DEFAULT NULL,
-  `gender` varchar(10) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Male',
-  `image` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Male',
+  `image1` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upvotes` int DEFAULT '0',
   `species_id` int DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '',
+  `image2` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
+  `image3` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
+  `image4` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
+  `image5` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pokemon`
 --
 
-INSERT INTO `pokemon` (`id`, `user_id`, `nickname`, `level`, `gender`, `image`, `created_at`, `upvotes`, `species_id`, `description`) VALUES
-(15, 1, '', 42, 'Male', '1780345481_images.jpg', '2026-06-01 20:24:41', 1, 448, ''),
-(16, 1, 'butiki', 21, 'Male', '1780345965_70e4122c5c9ad3953bf4c4de90fa6da2.jpg', '2026-06-01 20:32:45', 1, 4, 'aaaa aaaaa a a a a a a  a a a a aa a a  a a a a  a  a a a  a    a a a a a a  a a  a  a  a  a  a  a  a  a  a a a aaaaaaaaa a a  a a  a a a a  a  a  a'),
-(18, 5, 'Miffyy', 67, 'Female', '1780476366_miffy.jpg', '2026-06-03 08:46:06', 1, 40, 'eeeee'),
-(20, 1, 'gento', 100, 'Male', '1780496965_water.png', '2026-06-03 14:29:25', 0, 1000, 'dwadawdadadsa  dasdsada ada dsa dad a da d ad ad a da da d ad a da da d a da da da da d ad ad ad a d a d a da da da d as d asd a  d a da da da da d a');
+INSERT INTO `pokemon` (`id`, `user_id`, `nickname`, `level`, `gender`, `image1`, `created_at`, `upvotes`, `species_id`, `description`, `image2`, `image3`, `image4`, `image5`) VALUES
+(15, 1, '', 42, 'Male', '1780345481_images.jpg', '2026-06-01 20:24:41', 1, 448, '', '1780583632_2_d24c4a334d137f78.png', '', '', ''),
+(16, 1, 'butiki', 21, 'Male', '1780345965_70e4122c5c9ad3953bf4c4de90fa6da2.jpg', '2026-06-01 20:32:45', 1, 4, 'aaaa aaaaa a a a a a a  a a a a aa a a  a a a a  a  a a a  a    a a a a a a  a a  a  a  a  a  a  a  a  a  a a a aaaaaaaaa a a  a a  a a a a  a  a  a', '', '', '', ''),
+(18, 5, 'Miffyy', 67, 'Female', '1780476366_miffy.jpg', '2026-06-03 08:46:06', 2, 40, 'guys nahuli kotong pokemon nato sa bahay namin napakacute sobra gusto ko lang ishare pls paupvote narin para top 1 hehe', '1780571847_2_255.png', '', '', ''),
+(20, 1, 'gento', 100, 'Male', '1780496965_water.png', '2026-06-03 14:29:25', 1, 1000, 'dwadawdadadsa  dasdsada ada dsa dad a da d ad ad a da da d ad a da da d a da da da da d ad ad ad a d a d a da da da d as d asd a  d a da da da da d a', '1780568531_2_156.png', '1780568531_3_260.png', '', '');
 
 -- --------------------------------------------------------
 
@@ -1314,7 +1352,7 @@ CREATE TABLE IF NOT EXISTS `pokemon_votes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_vote` (`pokemon_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pokemon_votes`
@@ -1323,7 +1361,9 @@ CREATE TABLE IF NOT EXISTS `pokemon_votes` (
 INSERT INTO `pokemon_votes` (`id`, `pokemon_id`, `user_id`) VALUES
 (6, 15, 4),
 (5, 16, 4),
-(16, 18, 5);
+(19, 18, 1),
+(16, 18, 5),
+(31, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -1334,9 +1374,12 @@ INSERT INTO `pokemon_votes` (`id`, `pokemon_id`, `user_id`) VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `role` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'user',
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'user',
+  `card_theme` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'blue',
+  `bio` varchar(255) COLLATE utf8mb4_general_ci DEFAULT '',
+  `sticker_id` int DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1345,14 +1388,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
-(1, 'hatdog', '$2y$10$tq8cMtmf0F533gUJjsqM0uQUP.fZo8o2tt1DYA0O3i.kZEmos1Wf6', 'user'),
-(4, 'jhayzer07', '$2y$10$2JgWJ4at9tXU7/36Q/2um.yFjA2qGyB.yPrf34ochRRmzhkDL4BS.', 'user'),
-(5, 'jhayzordex', '$2y$10$F.YlOihx2OlK9vDdgzg6sOFbhqLxxUnQdBzNvpxYhLEmgLYXJAknm', 'user');
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `card_theme`, `bio`, `sticker_id`) VALUES
+(1, 'hatdog', '$2y$10$tq8cMtmf0F533gUJjsqM0uQUP.fZo8o2tt1DYA0O3i.kZEmos1Wf6', 'user', 'gold', 'Hi guys ako pala si paul at ako ay isang chill guy na maangas at malupit at pinakamalakas sa buong mundo ahahasjdahdwadghagdjywagdyhuagfdhawfg dhawdah', 1008),
+(4, 'jhayzer07', '$2y$10$2JgWJ4at9tXU7/36Q/2um.yFjA2qGyB.yPrf34ochRRmzhkDL4BS.', 'user', 'gold', 'ALien', 386),
+(5, 'jhayzordex', '$2y$10$F.YlOihx2OlK9vDdgzg6sOFbhqLxxUnQdBzNvpxYhLEmgLYXJAknm', 'user', 'green', 'pinaka astig at pinakamalakas na trainer', 384);
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`pokemon_id`) REFERENCES `pokemon` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `pokemon`

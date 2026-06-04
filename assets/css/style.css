@@ -19,7 +19,6 @@
     box-sizing: border-box;
 }
 
-/* Prevents layout shift (navbar jumping) when switching between pages */
 html {
     overflow-y: scroll;
 }
@@ -151,6 +150,28 @@ img {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll !important;
+}
+
+/* Custom GBA Scrollbar specifically for the Left Details Panel */
+.pc-info-panel::-webkit-scrollbar {
+    width: 12px;
+}
+
+.pc-info-panel::-webkit-scrollbar-track {
+    background: var(--pc-panel-bg); /* Blends perfectly into the gray panel background */
+    border-left: 2px solid #505050; /* Clean divider line separating the track */
+}
+
+.pc-info-panel::-webkit-scrollbar-thumb {
+    background: var(--dialogue-bg); /* Light retro dialogue box gray/white */
+    border: 2px solid var(--pc-panel-bg); /* Uses the track color to pad the thumb inward */
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 0 #ffffff, 1px 1px 0 rgba(0,0,0,0.2); /* 3D bevel block look */
+}
+
+.pc-info-panel::-webkit-scrollbar-thumb:hover {
+    background: #ffffff; /* Highlights brighter when hovered */
 }
 
 .panel-header {
@@ -375,10 +396,10 @@ img {
 }
 
 /* --- PC FILTERS --- */
-.pc-filter-form { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; color: var(--gba-text);}
+.pc-filter-form { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 24px; color: var(--gba-text);}
 .filter-inputs { display: flex; gap: 16px; flex: 1; }
 .filter-inputs input, .filter-inputs select { padding: 12px; border: 4px solid var(--dialogue-border-outer); background: #fff; font-family: inherit; font-size: 0.75rem; box-shadow: inset 2px 2px 0 #e0e0e0; }
-.filter-inputs button { background: var(--gba-green); color: #fff; border: 4px solid #306030; font-family: inherit; font-size: 0.75rem; padding: 0 24px; cursor: pointer; text-shadow: 2px 2px 0 #306030; box-shadow: inset 2px 2px 0 rgba(255,255,255,0.4); }
+.filter-inputs button { background: var(--gba-green); color: #fff; border: 4px solid #306030; font-family: inherit; font-size: 0.7rem; padding: 0 14px; cursor: pointer; text-shadow: 2px 2px 0 #306030; box-shadow: inset 2px 2px 0 rgba(255,255,255,0.4); }
 .filter-inputs button:hover { background: #88d860; }
 .result-count { font-size: 0.8rem; text-shadow: 2px 2px 0 var(--gba-text-shadow); }
 
@@ -421,13 +442,84 @@ img {
     margin-bottom: 20px; 
     border-bottom: 4px dotted rgba(255,255,255,0.6); 
     padding-bottom: 8px; 
-    width: 100%; 
+    width: 65% !important; 
+}
+
+/* Styled to look like a dashed, collectible pixel-art sticker (Enlarged & Zoomed) */
+.trainer-card .trainer-sprite {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 104px;       /* Increased from 96px */
+    height: 104px;      /* Increased from 96px */
+    image-rendering: pixelated;
+    filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.15));
+    border: 3px dashed rgba(255, 255, 255, 0.6); /* Sticker outline */
+    background: rgba(255, 255, 255, 0.15);
+    display: block;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    object-fit: contain;
+    padding: 0;         /* Removed padding to let the sprite fill the borders */
+    transform: scale(1.25); /* Crucial: Zooms in on the sprite to eliminate whitespace padding! */
+}
+
+/* NEW: GBA SIGNATURE PLAQUE FOR BIO INSIDE CARD */
+.trainer-card .tc-bio-row {
+    display: block;
+    width: 60%; /* Leaves perfect, safe margin for the sticker on the right */
+    margin-top: 14px;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: left;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.trainer-card .tc-bio-label {
+    font-size: 0.55rem;
+    color: #404040;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+}
+
+.trainer-card .tc-bio-text {
+    font-size: 0.55rem;
+    color: var(--gba-text);
+    line-height: 1.4;
+    display: block;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+    /* Safe word wrap prevents breaking words in half */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .tc-label { font-size: 0.85rem; color: #204060; text-shadow: 1px 1px 0 rgba(255,255,255,0.4); }
 .tc-value { font-size: 0.9rem; text-shadow: 2px 2px 0 rgba(255,255,255,0.6); }
 .tc-name { color: var(--gba-red); text-shadow: 2px 2px 0 #ffb0b0;}
 .tc-stats { margin-top: 40px; }
+
+/* --- TRAINER CARD THEMES --- */
+.trainer-card.theme-blue {
+    background: linear-gradient(180deg, #60a0d8 0%, #a8d0e8 100%);
+    outline-color: #202020;
+}
+.trainer-card.theme-red {
+    background: linear-gradient(180deg, #f86058 0%, #fca090 100%);
+    outline-color: #501010;
+}
+.trainer-card.theme-green {
+    background: linear-gradient(180deg, #78c850 0%, #b8f0a0 100%);
+    outline-color: #103810;
+}
+.trainer-card.theme-gold {
+    background: linear-gradient(180deg, #f8d030 0%, #fff088 100%);
+    outline-color: #604800;
+}
 
 /* --- FORMS & DROPDOWNS (Add PKMN) --- */
 form:not(.pc-filter-form) { background: var(--dialogue-bg); border: 4px solid var(--dialogue-border-outer); border-radius: 8px; box-shadow: inset 0 0 0 2px #ffffff, inset 0 0 0 4px var(--dialogue-border-inner), 4px 4px 0 rgba(0,0,0,0.15); max-width: 500px; margin: 40px auto; padding: 32px; color: var(--gba-text);}
@@ -453,155 +545,149 @@ form button:hover { background: #88d860; }
 
 .hof-list { display: flex; flex-direction: column; gap: 24px; max-width: 800px; margin: 0 auto; }
 
-/* Base Leaderboard Card (Ranks 4-10) */
+/* Changed from display:flex to display:block so the expanded area can span 100% width! */
 .hof-card {
-    display: flex; 
-    align-items: flex-start; 
+    display: block; 
     background: linear-gradient(90deg, rgba(248,248,248,1) 0%, rgba(220,220,220,1) 100%);
     border: 4px solid #f8f8f8; 
     outline: 4px solid #102040; 
     border-radius: 8px;
-    padding: 20px 24px 32px 24px;
+    padding: 20px 24px 28px 24px;
     box-shadow: inset 0 0 0 4px #b0b0b0, 8px 8px 0 rgba(0,0,0,0.3);
     position: relative;
     cursor: pointer;
     transition: transform 0.1s ease;
 }
-.hof-card:hover {
-    transform: translateY(-2px);
+.hof-card:hover { transform: translateY(-2px); }
+
+/* NEW: Card Header isolates the top part so the bottom can expand fully */
+.hof-card-header {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
 }
 
-/* podium card enhancements */
-.hof-card.rank-card-1 { /* GOLD CHAMPION CARD */
-    border: 4px solid #f8d820;
-    outline: 4px solid #806000;
-    background: linear-gradient(90deg, #fffdeb 0%, #ffe082 100%);
-    box-shadow: inset 0 0 0 4px #ffd54f, 8px 8px 0 rgba(0,0,0,0.35);
-}
-.hof-card.rank-card-2 { /* SILVER RUNNER-UP CARD */
-    border: 4px solid #e0e0e0;
-    outline: 4px solid #505050;
-    background: linear-gradient(90deg, #f5f5f5 0%, #cfd8dc 100%);
-    box-shadow: inset 0 0 0 4px #b0bec5, 8px 8px 0 rgba(0,0,0,0.3);
-}
-.hof-card.rank-card-3 { /* BRONZE THIRD-PLACE CARD */
-    border: 4px solid #d7ccc8;
-    outline: 4px solid #5d4037;
-    background: linear-gradient(90deg, #efebe9 0%, #d7ccc8 100%);
-    box-shadow: inset 0 0 0 4px #bcaaa4, 8px 8px 0 rgba(0,0,0,0.3);
-}
-
-/* Upvote Counter on the right */
-.hof-card::before {
-    content: "▲ " attr(data-upvotes); position: absolute; right: 20px; top: 20px;
-    font-size: 1.2rem; color: var(--gba-red); text-shadow: 2px 2px 0 #ffb0b0; font-weight: bold;
+/* Moved Upvotes out of ::before pseudo-element into a real physical div for perfect placement */
+.hof-upvote-badge {
+    position: absolute; 
+    right: 0; 
+    top: 0;
+    font-size: 1.2rem; 
+    color: var(--gba-red); 
+    text-shadow: 2px 2px 0 #ffb0b0; 
+    font-weight: bold;
 }
 
 /* Base Rank Text */
 .hof-rank { font-size: 2rem; width: 80px; text-align: center; margin-right: 16px; margin-top: 10px; }
 
 /* Custom Retro Colors for 1st, 2nd, and 3rd Place */
-.rank-1 { color: #f8d820; text-shadow: 3px 3px 0 #a08000, -1px -1px 0 #fff; } /* Gold */
-.rank-2 { color: #d0d0d0; text-shadow: 3px 3px 0 #606060, -1px -1px 0 #fff; } /* Silver */
-.rank-3 { color: #c08040; text-shadow: 3px 3px 0 #604020, -1px -1px 0 #fff; } /* Bronze */
-.rank-other { color: #a0a0a0; text-shadow: 3px 3px 0 #606060; font-size: 1.5rem; } /* Ranks 4-10 */
+.rank-card-1 { border-color: #f8d820; outline-color: #806000; background: linear-gradient(90deg, #fffdeb 0%, #ffe082 100%); box-shadow: inset 0 0 0 4px #ffd54f, 8px 8px 0 rgba(0,0,0,0.35); }
+.rank-card-2 { border-color: #e0e0e0; outline-color: #505050; background: linear-gradient(90deg, #f5f5f5 0%, #cfd8dc 100%); box-shadow: inset 0 0 0 4px #bcaaa4, 8px 8px 0 rgba(0,0,0,0.3); }
+.rank-card-3 { border-color: #d7ccc8; outline-color: #5d4037; background: linear-gradient(90deg, #efebe9 0%, #d7ccc8 100%); box-shadow: inset 0 0 0 4px #bcaaa4, 8px 8px 0 rgba(0,0,0,0.3); }
+
+.rank-1 { color: #f8d820; text-shadow: 3px 3px 0 #a08000, -1px -1px 0 #fff; } 
+.rank-2 { color: #d0d0d0; text-shadow: 3px 3px 0 #606060, -1px -1px 0 #fff; } 
+.rank-3 { color: #c08040; text-shadow: 3px 3px 0 #604020, -1px -1px 0 #fff; } 
+.rank-other { color: #a0a0a0; text-shadow: 3px 3px 0 #606060; font-size: 1.5rem; } 
 
 /* Circular Image Frame */
 .hof-sprite-box { 
-    width: 110px; 
-    height: 110px; 
-    background: #fff; 
-    border: 4px solid var(--hof-bg); 
-    border-radius: 50%; 
-    margin-right: 24px; 
-    box-shadow: inset 4px 4px 0 rgba(0,0,0,0.2); 
-    flex-shrink: 0;
-    overflow: hidden; 
-    position: relative;
+    width: 90px; height: 90px; background: #fff; border: 4px solid var(--hof-bg); 
+    border-radius: 50%; margin-right: 24px; box-shadow: inset 4px 4px 0 rgba(0,0,0,0.2); 
+    flex-shrink: 0; overflow: hidden; position: relative;
 }
+.hof-sprite-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.hof-sprite-box img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    display: block;
-}
-
-.hof-details {
-    flex: 1;
-}
+.hof-details { flex: 1; }
 .hof-details h2 { margin: 0 0 8px 0; font-size: 1.1rem; color: var(--gba-text); text-shadow: 2px 2px 0 #fff; text-transform: uppercase;}
 .hof-details p { margin: 0 0 6px 0; font-size: 0.75rem; color: #505050; }
 .hof-details .hof-trainer { color: var(--gba-blue); }
 
-/* Official Species Tag in Hall of Fame details block */
 .hof-species-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 4px 14px 4px 6px; /* Tightened left padding to accommodate zoomed sprite */
-    border-radius: 28px;
-    border: 2px solid #c0c0c0;
-    margin-bottom: 10px;
-    box-shadow: inset 1px 1px 0 #fff;
-    height: 50px;       /* Fixed height to keep all capsules perfectly identical */
-    overflow: hidden;   /* Cookie-cutter clip to keep large sprites contained */
+    display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.6);
+    padding: 4px 14px 4px 3px; border-radius: 28px; border: 2px solid #c0c0c0;
+    margin-bottom: 10px; box-shadow: inset 1px 1px 0 #fff; height: 54px; overflow: hidden;   
 }
-
-.hof-species-tag img {
-    width: 48px;        /* Enlarged standard image canvas */
-    height: 48px;       /* Enlarged standard image canvas */
-    object-fit: contain;
-    image-rendering: pixelated; 
-    flex-shrink: 0;
-    margin: 0px -2px 0px -6px; /* Negative margins pull the zoomed sprite center-stage */
-}
-
-.hof-species-tag span {
-    font-size: 0.65rem;
-    color: #404040;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
+.hof-species-tag img { width: 48px; height: 48px; object-fit: contain; image-rendering: pixelated; flex-shrink: 0; margin: 0 -2px 0 -6px; }
+.hof-species-tag span { font-size: 0.65rem; color: #404040; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
 
 /* Click Indicator Label */
-.hof-toggle-arrow {
-    position: absolute;
-    bottom: 8px;
-    right: 20px;
-    font-size: 0.5rem;
-    color: #888;
+.hof-toggle-arrow { position: absolute; bottom: 8px; right: 20px; font-size: 0.5rem; color: #888; text-transform: uppercase; }
+
+/* --- FULL WIDTH EXPANDABLE AREA --- */
+.hof-expandable {
+    width: 100%; /* Now takes up the entire bottom space perfectly */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+    margin-top: 0;
+}
+.hof-card.expanded .hof-expandable {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 16px;
+}
+
+.hof-section-divider {
+    height: 4px;
+    border-top: 2px dotted rgba(0, 0, 0, 0.3); /* Slightly darker dots for contrast */
+    margin: 16px 0;
+    width: 100%;
+}
+
+/* Improved White Description Box */
+.hof-desc-box {
+    background: #fff;
+    border: 2px solid #c0c0c0;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 0.65rem;
+    color: #404040;
+    line-height: 1.5;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* NEW: Full Width Stats Toggle Button */
+.hof-stats-toggle {
+    background: #e8e8e8;
+    border: 2px solid #a0a0a0;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.65rem;
+    text-align: center;
+    cursor: pointer;
+    color: var(--gba-text);
+    font-weight: bold;
+    box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #d0d0d0;
+    transition: all 0.1s ease;
     text-transform: uppercase;
 }
+.hof-stats-toggle:hover { background: #f0f0f0; }
+.hof-stats-toggle:active { box-shadow: inset 1px 1px 0 #d0d0d0; }
 
-/* Expandable Area */
-.hof-expandable {
-    width: 100%;
-    margin-top: 16px;
-    border-top: 2px dotted #c0c0c0;
-    padding-top: 16px;
-}
-
-/* High-Contrast GBA Battle Screen Stats Grid (Leaderboard-Only override) */
 .hof-card .stats-grid {
-    background: #1c2434; /* Deep slate GBA screen color */
-    border: 3px solid #505050;
+    background: #b5bfd3;
+    border: 3px solid #afafaf;
     border-radius: 6px;
     padding: 12px 16px;
     box-shadow: inset 3px 3px 0 #000000;
+    margin-top: 8px; /* Detaches it from the button slightly */
 }
+.hof-card .stat-inner-row .label { color: #ff8a80; text-shadow: 1px 1px 0 #000; }
+.hof-card .stat-inner-row .val { color: #ffffff; text-shadow: 1px 1px 0 #000; }
 
-.hof-card .stat-inner-row .label {
-    color: #ff8a80; /* High-visibility soft red labels */
-    text-shadow: 1px 1px 0 #000;
+.hof-album-box {
+    position: relative;
+    background: #b8e0f8;
+    background-image: linear-gradient(45deg, #a8d0e8 25%, transparent 25%, transparent 75%, #a8d0e8 75%, #a8d0e8), linear-gradient(45deg, #a8d0e8 25%, transparent 25%, transparent 75%, #a8d0e8 75%, #a8d0e8);
+    background-size: 16px 16px; background-position: 0 0, 8px 8px;
+    border: 4px solid #4a7ab8; border-radius: 8px; height: 180px;
+    display: flex; justify-content: center; align-items: center; margin-bottom: 16px;
+    box-shadow: inset 4px 4px 0 rgba(255,255,255,0.4), inset -4px -4px 0 rgba(0,0,0,0.1);
 }
-
-.hof-card .stat-inner-row .val {
-    color: #ffffff; /* Crisp white value numbers */
-    text-shadow: 1px 1px 0 #000;
-}
+.hof-carousel-img { max-width: 160px; max-height: 160px; object-fit: contain; filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.15)); }
 
 /* Retro PKMN Description Box */
 .pkmn-description {
@@ -645,6 +731,229 @@ form textarea:focus {
 }
 .desc-toggle-link:hover {
     color: var(--gba-red);
+}
+
+/* Retro Carousel / Album Styles */
+.sprite-box {
+    position: relative; /* Added to keep carousel buttons contained */
+}
+
+.carousel-img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.15));
+    display: none;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--dialogue-bg);
+    border: 2px solid var(--dialogue-border-outer);
+    color: var(--gba-text);
+    font-family: inherit;
+    font-size: 0.6rem;
+    padding: 6px 8px;
+    cursor: pointer;
+    box-shadow: inset 1px 1px 0 #fff, 2px 2px 0 rgba(0,0,0,0.2);
+    z-index: 10;
+    display: none;
+}
+
+.carousel-btn:hover { background: #e0e8f8; color: var(--gba-blue); }
+.carousel-btn:active { box-shadow: inset 1px 1px 0 #b0c0d0; transform: translateY(-48%); }
+
+.carousel-prev { left: 4px; }
+.carousel-next { right: 4px; }
+
+.carousel-dots {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    justify-content: center;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border: 2px solid var(--dialogue-border-outer);
+    border-radius: 50%;
+    display: none;
+}
+.carousel-dot.active { background: var(--gba-red); border-color: #802020; }
+
+/* Upload slots for Add/Edit pages */
+.upload-slot {
+    background: #f0f0f0;
+    border: 2px dashed #b0b0b0;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+}
+
+/* --- CAROUSEL ANIMATIONS & LIGHTBOX --- */
+.carousel-img {
+    cursor: zoom-in; /* Tells the user they can click to zoom */
+}
+
+/* Sliding Animations */
+.slide-in-right { animation: slideInRight 0.25s ease-out forwards; }
+.slide-in-left { animation: slideInLeft 0.25s ease-out forwards; }
+
+@keyframes slideInRight {
+    0% { transform: translateX(30px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideInLeft {
+    0% { transform: translateX(-30px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    left: 0; top: 0; 
+    width: 100vw; height: 100vh; 
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center; 
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.lightbox-content {
+    max-width: 90%; 
+    max-height: 90vh; 
+    background: #f8f8f8;
+    border: 6px solid #505050; 
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: inset 0 0 0 4px #d0d0d0, 0 8px 32px rgba(0,0,0,0.8);
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute; 
+    top: 24px; 
+    right: 40px; 
+    color: #fff; 
+    font-size: 2rem; 
+    font-weight: bold; 
+    cursor: pointer;
+    text-shadow: 2px 2px 0 #000;
+}
+.lightbox-close:hover { color: var(--gba-red); }
+
+/* --- COMMENTS SECTION (Retro Chat Log) --- */
+.comments-section {
+    margin-top: 12px;
+    border-top: 2px dotted #c0c0c0;
+    padding-top: 12px;
+}
+.comments-header {
+    font-size: 0.65rem;
+    color: var(--gba-text);
+    margin: 0 0 6px 0;
+    text-shadow: 1px 1px 0 #fff;
+}
+.comments-list {
+    background: #fff;
+    border: 3px inset #c0c0c0;
+    border-radius: 4px;
+    max-height: 110px; 
+    overflow-y: auto;
+    padding: 6px;
+    margin-bottom: 8px;
+    font-family: inherit;
+}
+.comments-list::-webkit-scrollbar { width: 8px; }
+.comments-list::-webkit-scrollbar-track { background: #e0e0e0; border-left: 1px solid #ccc; }
+.comments-list::-webkit-scrollbar-thumb { background: #a0a0a0; border: 1px solid #777; border-radius: 4px; }
+
+.comment-item {
+    font-size: 0.6rem;
+    line-height: 1.5;
+    margin-bottom: 6px;
+    border-bottom: 1px dashed #e0e0e0;
+    padding-bottom: 4px;
+    word-break: break-word;
+}
+.comment-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.comment-author { color: var(--gba-blue); text-shadow: 1px 1px 0 #e8f5e9; }
+.comment-text { color: #404040; }
+.comment-delete {
+    float: right;
+    color: var(--gba-red);
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 4px;
+}
+
+.comment-author a {
+    color: inherit;
+    text-decoration: underline;
+}
+.comment-author a:hover {
+    color: var(--gba-red);
+}
+
+.comment-delete:hover { background: #ffe0e0; }
+
+/* Perfect Alignment & Retro Bevel styling for POST button */
+/* Perfect Alignment & Retro Bevel styling for POST button */
+.comment-input-row { 
+    display: flex; 
+    gap: 6px; 
+    align-items: stretch; 
+    width: 100%; /* Ensures the row doesn't break out of the box */
+}
+
+.comment-input-row input {
+    flex: 1 1 auto; 
+    min-width: 0; /* THIS IS THE MAGIC FIX: Forces input to shrink and not push the button out! */
+    padding: 8px;
+    font-size: 0.65rem;
+    border: 2px solid var(--dialogue-border-outer);
+    border-radius: 4px;
+    font-family: inherit;
+    background: #fff;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.comment-input-row input:focus {
+    outline: none;
+    border-color: var(--gba-blue);
+}
+
+.comment-input-row button {
+    flex: 0 0 auto; /* Prevents the button from getting squished */
+    padding: 0 12px;
+    font-size: 0.6rem;
+    background: var(--gba-green);
+    color: #fff;
+    border: 2px solid var(--dialogue-border-outer);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.4), inset -1px -1px 0 rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 0 #306030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment-input-row button:hover {
+    background: #88d860;
+}
+
+.comment-input-row button:active {
+    box-shadow: inset -1px -1px 0 rgba(255,255,255,0.4), inset 1px 1px 0 rgba(0,0,0,0.2);
 }
 
 /* --- MEDIA QUERIES (RESPONSIVENESS) --- */
